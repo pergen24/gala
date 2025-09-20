@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-container">
+  <div class="welcome-message">
+    <h2>🌟 ¡Bienvenido a la Gran Gala Elegante 2025! 🌟</h2>
+    <p>
+      Prepárate para una noche inolvidable llena de <b>elegancia</b>, <b>música</b> y <b>celebración</b>.
+      Compra tu entrada y forma parte de un evento exclusivo donde la <b>magia</b> y el <b>glamour</b> se encuentran.
+    </p>
+    <a class="btn btn-primary btn-lg mt-3" href="{{ url_for('main.elegir_ticket') }}">
+      🎟 Elegir tu ticket
+    </a>
+  </div>
+
+  <div class="welcome-logo">
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo Gala">
+  </div>
+</div>
+
+<hr class="my-5">
+
+<div class="map-section">
+  <h3 class="text-center">📍 Ubicación del Evento</h3>
+  <div id="map"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
+  <script>
+    function initMap() {
+      var location = { lat: 14.6928, lng: -17.4467 }; // Dakar como ejemplo
+      var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: location
+      });
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: "Gran Gala 2025 - Local del Evento"
+      });
+    }
+  </script>
+{% endblock %}
+
+<style>
+.welcome-container {
+  display: flex;
+  flex-direction: column;  /* 👈 ahora en columna */
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0;
+  text-align: center; /* 👈 centra el texto */
+}
+
+.welcome-logo img {
+  max-width: 50px;  /* 👈 un tamaño más visible */
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.welcome-message {
+  max-width: 600px;
+}
+
+.welcome-message h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.welcome-message p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+</style>

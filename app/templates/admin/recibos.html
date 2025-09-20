@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Recibos por Revisar</h1>
+
+{% if purchases %}
+<ul>
+    {% for p in purchases %}
+    <li>
+        #{{ p.id }} - {{ p.first_name }} {{ p.last_name }} - {{ p.ticket_type }} - {{ p.status }}
+        {% if p.receipt_filename %}
+            - <a href="{{ url_for('main.uploaded_file', filename=p.receipt_filename) }}" target="_blank">Ver recibo</a>
+        {% endif %}
+        {% if p.status != 'approved' %}
+            - <form action="{{ url_for('main.admin_approve', purchase_id=p.id) }}" method="post" style="display:inline">
+                <button type="submit">Aprobar y generar PDF</button>
+              </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay recibos pendientes.</p>
+{% endif %}
+
+<p><a href="{{ url_for('main.admin_index') }}">Volver al Panel Admin</a></p>
+{% endblock %}

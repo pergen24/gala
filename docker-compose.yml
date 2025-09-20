@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    environment:
+      - FLASK_APP=manage.py
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://pergentino:098765@db:5432/gala
+      - UPLOAD_FOLDER=/app/uploads
+    ports:
+      - "5000:5000"   # expone la app al host y red local
+    volumes:
+      - .:/app
+      - ./uploads:/app/uploads
+    depends_on:
+      - db
+    entrypoint: /app/entrypoint.sh
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: gala
+      POSTGRES_USER: pergentino
+      POSTGRES_PASSWORD: 098765
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "54324:5432"   # expone PostgreSQL al host para conexiones externas
+    # opcional: restringir acceso por IP con pg_hba.conf
+volumes:
+  pgdata:
