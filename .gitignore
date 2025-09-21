@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.env
+*.env
+
+# Bases de datos y backups
+*.db
+*.sqlite3
+backup.sql
+backup.dump
+
+# Archivos generados
+uploads/
+generated_tickets/
+
+# Logs
+*.log
+
+# Docker
+*.pid

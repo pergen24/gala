@@ -1,25 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Sección de saludo institucional -->
+<div class="saludo-oficial">
+  <h2>🇬🇶 Mensaje Institucional 🇬🇶</h2>
+  <p>
+    En ocasión de la <b>Conmemoración de la Independencia de Guinea Ecuatorial</b>, celebrada cada 
+    <b>12 de Octubre</b>, expresamos nuestro orgullo nacional y renovamos nuestro compromiso con la 
+    <b>unidad</b>, el <b>progreso</b> y el <b>bienestar del pueblo ecuatoguineano</b>.
+  </p>
+  <p>
+    Este acto conmemorativo, organizado por la <b>Asociación de Estudiantes Ecuatoguineanos en Senegal (AEEES)</b>,
+    constituye una oportunidad para reafirmar nuestros lazos culturales, académicos y patrióticos en el 
+    extranjero, bajo la inspiración de nuestra Nación y la guía de sus instituciones.
+  </p>
+  <p class="firma">
+    <i>Con los mejores deseos de paz y prosperidad para nuestra querida Guinea Ecuatorial.</i>
+  </p>
+</div>
+
+<hr class="my-5">
+
+<!-- Bienvenida general -->
 <div class="welcome-container">
   <div class="welcome-message">
-    <h2>🌟 ¡Bienvenido a la Gran Gala Elegante 2025! 🌟</h2>
+    <h2>🌟 Gran Gala de la Independencia 2025 🌟</h2>
+    <h4 class="subtitle">12 de Octubre - Guinea Ecuatorial</h4>
     <p>
-      Prepárate para una noche inolvidable llena de <b>elegancia</b>, <b>música</b> y <b>celebración</b>.
-      Compra tu entrada y forma parte de un evento exclusivo donde la <b>magia</b> y el <b>glamour</b> se encuentran.
+      La <b>AEEES</b> tiene el honor de invitarle a esta velada especial llena de <b>unidad</b>, <b>cultura</b> y <b>orgullo nacional</b>.  
     </p>
-    <a class="btn btn-primary btn-lg mt-3" href="{{ url_for('main.elegir_ticket') }}">
-      🎟 Elegir tu ticket
+    <p>
+      Una noche de <b>elegancia</b>, <b>música</b>, <b>tradición</b> y <b>hermandad</b>, con la presencia de distinguidas 
+      personalidades, estudiantes y miembros de nuestra comunidad.
+    </p>
+    <a class="btn btn-success btn-lg mt-3" href="{{ url_for('main.elegir_ticket') }}">
+      🎟 Reservar mi entrada
     </a>
-  </div>
-
-  <div class="welcome-logo">
-    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo Gala">
   </div>
 </div>
 
 <hr class="my-5">
 
+<!-- Sección de detalles -->
+<div class="details-section text-center">
+  <h3>🌍 Detalles del Evento</h3>
+  <p><b>Fecha:</b> Domingo 12 de Octubre de 2025</p>
+  <p><b>Lugar:</b> Dakar, Senegal</p>
+  <p><b>Organiza:</b> AEEES - Asociación de Estudiantes Ecuatoguineanos en Senegal</p>
+  <p><b>Vestimenta:</b> Elegante / Tradicional</p>
+</div>
+
+<hr class="my-5">
+
+<!-- Ubicación -->
 <div class="map-section">
   <h3 class="text-center">📍 Ubicación del Evento</h3>
   <div id="map"></div>
@@ -35,7 +68,14 @@
       var location = { lat: 14.6928, lng: -17.4467 }; // Dakar como ejemplo
       var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 14,
-        center: location
+        center: location,
+        styles: [
+          { elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
+          { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#333333" }] },
+          { elementType: "labels.text.stroke", stylers: [{ color: "#ffffff" }] },
+          { featureType: "water", stylers: [{ color: "#0077b6" }] }
+        ]
       });
       var marker = new google.maps.Marker({
         position: location,
@@ -47,36 +87,83 @@
 {% endblock %}
 
 <style>
-.welcome-container {
-  display: flex;
-  flex-direction: column;  /* 👈 ahora en columna */
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin: 40px 0;
-  text-align: center; /* 👈 centra el texto */
+/* Mensaje institucional */
+.saludo-oficial {
+  background: linear-gradient(90deg, #007849, #ffffff, #0077b6, #d62828);
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 12px;
+  color: #fff;
+  margin: 30px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.welcome-logo img {
-  max-width: 50px;  /* 👈 un tamaño más visible */
-  height: auto;
-  border-radius: 6px;
+.saludo-oficial h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.saludo-oficial p {
+  font-size: 1.1rem;
+  margin: 10px auto;
+  max-width: 800px;
+}
+
+.saludo-oficial .firma {
+  margin-top: 20px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Bienvenida */
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin: 40px 0;
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 16px;
+  background: #f9f9f9;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.welcome-message {
-  max-width: 600px;
+.welcome-message h2 {
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2c3e50;
 }
 
-.welcome-message h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2c3e50;
+.subtitle {
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 20px;
+  color: #007849;
 }
 
 .welcome-message p {
   font-size: 1.1rem;
-  color: #555;
+  color: #333;
+}
+
+.details-section {
+  background: #fdfdfd;
+  padding: 40px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.details-section h3 {
+  color: #007849;
+  margin-bottom: 20px;
+}
+
+.details-section p {
+  font-size: 1.1rem;
+  margin: 8px 0;
 }
 
 #map {
@@ -84,5 +171,6 @@
   width: 100%;
   border-radius: 12px;
   margin-top: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 </style>
