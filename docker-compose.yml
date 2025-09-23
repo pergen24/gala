@@ -4,29 +4,15 @@ services:
     build: .
     environment:
       - FLASK_APP=manage.py
-      - FLASK_ENV=development
-#      - DATABASE_URL=postgresql://pergentino:098765@db:5432/gala
-      - DATABASE_URL=postgresql+psycopg2://neondb_owner:npg_OZt6YRgW7ASF@ep-dry-meadow-adyj4mki-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+      - FLASK_ENV=production
+      - DATABASE_URL=postgresql+psycopg2://neondb_owner:npg_mUPGMj0O5eyq@ep-green-boat-adjdm91u-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
       - UPLOAD_FOLDER=/app/uploads
+      - SECRET_KEY=tu_secret_key
+      - MAIL_USERNAME=membilambasipergentino@gmail.com
+      - MAIL_PASSWORD=euwnlfxmgfcpseeh
     ports:
-      - "5000:5000"   # expone la app al host y red local
+      - "5000:5000"
     volumes:
       - .:/app
       - ./uploads:/app/uploads
-    depends_on:
-      - db
     entrypoint: /app/entrypoint.sh
-
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: gala
-      POSTGRES_USER: pergentino
-      POSTGRES_PASSWORD: 098765
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    ports:
-      - "54324:5432"   # expone PostgreSQL al host para conexiones externas
-    # opcional: restringir acceso por IP con pg_hba.conf
-volumes:
-  pgdata:
